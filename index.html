@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IETE-ISF · VIT Mumbai Student Forum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07111f;--bg2:#0a1a2e;--card:#0b1d33;--line:#16314f;--text:#e8f1fb;--muted:#8fa6bf;
+  --cyan:#2db7f5;--yellow:#ffc41f;--dim:#3a5573;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --sans:'Space Grotesk',system-ui,-apple-system,Segoe UI,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:70px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5;
+  background-image:radial-gradient(rgba(45,183,245,.12) 1px,transparent 1px);background-size:24px 24px}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--mono)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(7,17,31,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:26px;height:26px;border:2px solid var(--cyan);border-radius:5px;position:relative}
+.logo::after{content:"";position:absolute;inset:5px;background:var(--cyan);border-radius:2px;opacity:.7}
+.brand b{font-size:15px}
+.tag{font-family:var(--mono);font-size:9px;color:var(--cyan);background:rgba(45,183,245,.12);border:1px solid rgba(45,183,245,.35);border-radius:4px;padding:1px 6px;margin-left:6px}
+.brand small{display:block;font-family:var(--mono);font-size:8px;color:var(--muted);letter-spacing:.08em}
+.links{display:flex;gap:40px;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em}
+.links a:hover{color:var(--cyan)}
+.navr{display:flex;align-items:center;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;padding:11px 20px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:filter .15s}
+.btn:hover{filter:brightness(1.12)}
+.b-cyan{background:var(--cyan);color:#04121f}
+.b-yel{background:transparent;color:var(--yellow);border-color:var(--yellow)}
+.b-solid-yel{background:var(--yellow);color:#201600}
+.user{width:30px;height:30px;border-radius:50%;background:var(--cyan);display:grid;place-items:center;color:#04121f;font-size:13px}
+.burger{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;width:36px;height:36px;font-size:16px;cursor:pointer}
+.sub{height:2px;background:linear-gradient(90deg,var(--yellow) 0 6%,transparent 6% 94%,var(--cyan) 94%)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:56px 0 40px}
+.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;color:var(--cyan);background:rgba(45,183,245,.08);border:1px solid var(--line);border-radius:999px;padding:5px 12px;margin-bottom:24px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+h1{font-size:clamp(38px,5.2vw,56px);line-height:1.06;margin:0 0 20px;font-weight:700;letter-spacing:-.02em;max-width:9em}
+.lead{color:var(--muted);font-size:15px;max-width:30em;margin:0 0 28px}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:34px;max-width:480px}
+.meta b{color:var(--yellow);font-weight:500}.meta i{font-style:normal;color:var(--cyan)}
+
+.scope{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px 16px;box-shadow:0 0 0 1px rgba(45,183,245,.08),0 20px 50px rgba(0,0,0,.5)}
+.scope-h{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--muted);margin-bottom:10px}
+.scope-h b{color:var(--yellow);font-weight:500}.scope-h span:last-child{color:var(--cyan)}
+.screen{background:#061321;border:1px solid var(--line);border-radius:8px;position:relative;overflow:hidden}
+.screen svg{display:block;width:100%;height:auto}
+.knobs{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:var(--mono);font-size:8px;color:var(--muted)}
+.k{display:flex;flex-direction:column;align-items:center;gap:4px}
+.k i{width:22px;height:22px;border-radius:50%;border:2px solid var(--yellow);display:block;position:relative}
+.k i::after{content:"";position:absolute;left:50%;top:2px;width:2px;height:7px;background:var(--yellow);transform:translateX(-50%)}
+.k.c i{border-color:var(--cyan)}.k.c i::after{background:var(--cyan)}
+.k.off i{border-color:var(--dim)}.k.off i::after{background:var(--dim)}
+.kg{display:flex;gap:14px}
+
+/* sections */
+section{padding:56px 0;border-top:1px solid var(--line)}
+.kick{font-family:var(--mono);font-size:10px;color:var(--yellow);margin-bottom:6px}
+h2{font-size:clamp(28px,3.6vw,36px);margin:0 0 8px;letter-spacing:-.01em}
+.sec-p{color:var(--muted);font-size:13px;max-width:30em;margin:0 0 32px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;position:relative;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.card::before,.card::after{content:"";position:absolute;top:8px;width:5px;height:5px;border-radius:50%;border:1px solid var(--dim)}
+.card::before{left:8px}.card::after{right:8px}
+.card .ids{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;margin-bottom:12px}
+.card .ids span:first-child{color:var(--cyan)}.card .ids span:last-child{color:var(--dim)}
+.card h3{font-size:15px;margin:0 0 10px}
+.card p{margin:0 0 20px;color:var(--muted);font-size:12.5px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-family:var(--mono);font-size:9px;color:var(--cyan);background:rgba(45,183,245,.1);border:1px solid rgba(45,183,245,.2);border-radius:4px;padding:3px 8px}
+
+/* events */
+.ev{display:flex;align-items:center;gap:20px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 26px;margin-bottom:16px}
+.ev .bar{width:6px;align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:6px;flex:none}
+.ev .bar i{width:6px;height:6px;border-radius:50%;background:var(--yellow)}
+.ev.c .bar i{background:var(--cyan)}
+.ev .body{flex:1;min-width:0}
+.date{font-family:var(--mono);font-size:9px;color:var(--cyan);display:flex;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.ev.y .date{color:var(--yellow)}.date em{font-style:normal;color:var(--dim)}
+.ev h3{margin:0 0 4px;font-size:15px}
+.ev p{margin:0;color:var(--muted);font-size:12.5px}
+.ev .btn{flex:none;min-width:130px;padding:10px 18px;border-radius:6px}
+
+/* team */
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.mem{text-align:center;padding:26px 14px 20px}
+.chipic{width:44px;height:44px;margin:0 auto 22px;border:1px solid var(--line);background:#0e2744;border-radius:3px;position:relative;display:grid;place-items:center;font-family:var(--mono);font-size:9px;color:var(--cyan)}
+.chipic::before,.chipic::after{content:"";position:absolute;top:6px;bottom:6px;width:4px;background:repeating-linear-gradient(var(--yellow) 0 4px,transparent 4px 10px)}
+.chipic::before{left:-5px}.chipic::after{right:-5px}
+.mem .id{font-family:var(--mono);font-size:9px;color:var(--cyan);margin-bottom:6px}
+.mem h3{font-family:var(--mono);font-size:13px;margin:0 0 4px}
+.mem .role{font-size:11px;color:var(--yellow);margin-bottom:16px}
+.mem .sk{font-family:var(--mono);font-size:8.5px;color:var(--dim);padding-top:10px;border-top:1px solid var(--line)}
+
+/* cta */
+.join{border:2px solid var(--yellow);border-radius:14px;padding:30px 36px;display:flex;align-items:center;justify-content:space-between;gap:28px;position:relative;background:rgba(255,196,31,.03);margin:0 0 0}
+.join::before,.join::after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:var(--yellow);left:10px;top:10px;box-shadow:0 0 0 0 transparent}
+.join::after{left:auto;right:10px}
+.join h2{color:var(--yellow);margin:6px 0 10px;font-size:clamp(28px,3.6vw,34px)}
+.join p{margin:0;max-width:26em;font-size:14px}
+.join .btn{padding:16px 28px;border-radius:6px;flex:none}
+.ctasec{padding:48px 0;border-top:1px solid var(--line)}
+
+/* location strip + footer */
+.loc{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;font-family:var(--mono);font-size:10px;color:var(--yellow)}
+.loc .wrap{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.loc .sep{width:1px;height:14px;background:var(--line)}
+.loc .r{margin-left:auto;color:var(--muted);display:flex;gap:8px;align-items:center}
+.loc .r::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cyan)}
+.loc span.w{color:var(--text)}
+footer{padding:36px 0 22px}
+.fg{display:grid;grid-template-columns:1.2fr 1fr 1.2fr 1fr;gap:32px}
+.fg h4{font-family:var(--mono);font-size:10px;color:var(--cyan);margin:0 0 14px;font-weight:500}
+.fg p,.fg li{font-size:11px;color:var(--muted);margin:0}
+.fg ul{list-style:none;margin:0;padding:0;display:grid;gap:5px;font-family:var(--mono);font-size:10px}
+.fg li a:hover{color:var(--cyan)}
+.fb{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.fb b{font-size:14px}
+.sig{font-family:var(--mono);font-size:10px;margin-top:8px;color:var(--text)!important}
+.sig b{color:var(--yellow);font-weight:500}
+.bus{display:flex;gap:8px;flex-wrap:wrap}
+.bus a{font-family:var(--mono);font-size:9px;color:var(--muted);border:1px solid var(--line);background:rgba(45,183,245,.06);border-radius:4px;padding:3px 8px}
+.bus a:hover{color:var(--cyan);border-color:var(--cyan)}
+.fbot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:9px;color:var(--dim);margin-top:32px;padding-top:20px;border-top:1px solid var(--line)}
+
+/* responsive */
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr}
+  .grid3{grid-template-columns:1fr}
+  .grid4{grid-template-columns:repeat(2,1fr)}
+  .fg{grid-template-columns:1fr 1fr}
+  .join{flex-direction:column;align-items:flex-start}
+}
+@media (max-width:760px){
+  .burger{display:block}
+  .links{display:none;position:absolute;top:56px;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 20px}
+  .links.open{display:flex}
+  .links a{padding:12px 0;border-bottom:1px solid var(--line)}
+  .brand small{display:none}
+  .navr .btn{padding:9px 14px}
+  .ev{flex-direction:column;align-items:flex-start}
+  .ev .btn{width:100%}
+  .ev .bar{display:none}
+  .meta{flex-direction:column}
+  .loc .sep{display:none}.loc .r{margin-left:0}
+  .join{padding:26px 22px}.join .btn{width:100%}
+}
+@media (max-width:520px){
+  .grid4{grid-template-columns:1fr}
+  .fg{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.wave{animation:none!important}}
+.wave{animation:drift 6s linear infinite}
+@keyframes drift{to{transform:translateX(-120px)}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="logo" aria-hidden="true"></span>
+      <span><b>IETE</b><span class="tag">REV 2.4 / ETRX</span><small>VIT MUMBAI STUDENT FORUM</small></span></a>
+    <div class="links" id="links">
+      <a href="#about">ABOUT</a><a href="#events">EVENTS</a><a href="#team">TEAM</a>
+    </div>
+    <div class="navr">
+      <a class="btn b-cyan" href="#join">JOIN</a>
+      <span class="user" aria-hidden="true">&#9679;</span>
+      <button class="burger" aria-label="Menu" onclick="document.getElementById('links').classList.toggle('open')">&#9776;</button>
+    </div>
+  </div>
+  <div class="sub"></div>
+</nav>
+
+<main id="top">
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <div class="status mono"><span class="dot"></span>[CH-1 ACTIVE: 100 KHZ] • STUDENT CHAPTER 2025</div>
+      <h1>Where circuits meet curiosity.</h1>
+      <p class="lead">The student-led electronics and telecommunication engineering community at VIT Mumbai turning theory into hardware.</p>
+      <div class="cta">
+        <a class="btn b-cyan" href="#join">● JOIN COMMITTEE</a>
+        <a class="btn b-yel" href="#events">[02 EVENTS &gt;&gt;]</a>
+      </div>
+      <div class="meta"><span>BUS: <i>SPI / I2C</i></span><span>CLK: <b>16 MHz</b></span><span>ACTIVE MAKERS: <i>120+ NODES</i></span></div>
+    </div>
+    <div class="scope" role="img" aria-label="Oscilloscope showing a cyan sine wave">
+      <div class="scope-h"><span>RIGOL/VIT-DS1054Z <b>AUTO</b></span><span>● T: TRIG'D</span></div>
+      <div class="screen">
+        <svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="g" width="52" height="41" patternUnits="userSpaceOnUse"><path d="M52 0H0V41" fill="none" stroke="#1b3a5c" stroke-width="1"/></pattern>
+            <filter id="gl"><feGaussianBlur stdDeviation="3"/></filter>
+          </defs>
+          <rect width="520" height="330" fill="#061321"/><rect width="520" height="330" fill="url(#g)"/>
+          <line x1="0" y1="165" x2="520" y2="165" stroke="#2a4d73"/><line x1="260" y1="0" x2="260" y2="330" stroke="#2a4d73"/>
+          <g font-family="JetBrains Mono,monospace" font-size="10">
+            <text x="14" y="22" fill="#ffc41f">CH1 1.00V/div</text><text x="210" y="22" fill="#2db7f5" opacity=".7">CH2 500mV/div</text><text x="428" y="22" fill="#ffc41f">M 2.00ms</text>
+            <text x="14" y="318" fill="#2db7f5">FREQ: 1.000 kHz</text><text x="215" y="318" fill="#ffc41f">Vpp: 3.32 V</text><text x="420" y="318" fill="#2db7f5">RMS: 1.17 V</text>
+          </g>
+          <g clip-path="inset(0)">
+            <g class="wave">
+              <path d="M-120 165 C-90 60,-30 60,0 165 S30 270,60 165 S90 60,120 165 S150 270,180 165 S210 60,240 165 S270 270,300 165 S330 60,360 165 S390 270,420 165 S450 60,480 165 S510 270,540 165 S570 60,600 165 S630 270,660 165" fill="none" stroke="#2db7f5" stroke-width="7" opacity=".35" filter="url(#gl)" transform="scale(1,.85) translate(0,29)"/>
+              <path d="M-120 165 C-90 60,-30 60,0 165 S30 270,60 165 S90 60,120 165 S150 270,180 165 S210 60,240 165 S270 270,300 165 S330 60,360 165 S390 270,420 165 S450 60,480 165 S510 270,540 165 S570 60,600 165 S630 270,660 165" fill="none" stroke="#35c3ff" stroke-width="2.5" transform="scale(1,.85) translate(0,29)"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="knobs">
+        <div class="kg"><span class="k"><i></i>CH1 [ON]</span><span class="k off"><i></i>CH2 [OFF]</span></div>
+        <div class="kg"><span class="k"><i></i>VOLT/DIV</span><span class="k c"><i></i>SEC/DIV</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="about"><div class="wrap">
+  <div class="kick mono">// MODULE_INIT // 01</div>
+  <h2>What We Do</h2>
+  <p class="sec-p">Bridging circuit simulation, hardware assembly, and live field measurements through continuous practical iterations.</p>
+  <div class="grid3">
+    <article class="card"><div class="ids"><span>[LAB-WKSP_01]</span><span>TP_01</span></div><h3>Hands-on Workshops</h3><p>From soldering surface-mount ICs to micro-controller firmware, bridge the gap between classroom theory and silicon.</p><div class="chips"><span class="chip">SMD Soldering</span><span class="chip">ESP32 / ARM</span><span class="chip">Altium &amp; KiCAD</span></div></article>
+    <article class="card"><div class="ids"><span>[SEMINAR_02]</span><span>TP_T2</span></div><h3>Industry Tech Talks</h3><p>Deep-dives with RF architects, VLSI tapeout veterans, and telecom researchers sharing real production challenges.</p><div class="chips"><span class="chip">5G &amp; SDR</span><span class="chip">ASIC Design</span><span class="chip">Embedded Linux</span></div></article>
+    <article class="card"><div class="ids"><span>[R&amp;D_LAB_03]</span><span>TP_P3</span></div><h3>Hardware R&amp;D Projects</h3><p>Collaborative builds from autonomous rovers to telemetry weather balloons deployed across campus.</p><div class="chips"><span class="chip">Antenna Arrays</span><span class="chip">IoT Nodes</span><span class="chip">Motor Drivers</span></div></article>
+  </div>
+</div></section>
+
+<section id="events"><div class="wrap">
+  <div class="kick mono">// SCHEDULE_LOG // 02</div>
+  <h2>Upcoming Events</h2>
+  <p class="sec-p">Scheduled laboratory sessions, design marathons, and RF spectrum capture drills.</p>
+  <article class="ev c"><div class="bar"><i></i></div><div class="body"><div class="date mono"><span>● [DATE: 15 MARCH 2025]</span><em>// LAB_SESSION_4</em></div><h3>PCB Design from Schematic to Fabrication</h3><p>Learn schematic capture, 2-layer routing in KiCAD, and prepare Gerber files for professional fabrication.</p></div><a class="btn b-cyan" href="#join">[REGISTER -&gt;]</a></article>
+  <article class="ev y"><div class="bar"><i></i></div><div class="body"><div class="date mono"><span>● [DATE: 28 MARCH 2025]</span><em>// SDR_BANK_WKP</em></div><h3>SDR &amp; RF Hacking Bootcamp</h3><p>Capture and decode radio signals, aircraft ADS-B transponders, and satellite telemetry using RTL-SDR.</p></div><a class="btn b-yel" href="#join">[REGISTER -&gt;]</a></article>
+  <article class="ev c"><div class="bar"><i></i></div><div class="body"><div class="date mono"><span>● [DATE: 10 APRIL 2025]</span><em>// HACKATHON_TBD</em></div><h3>Annual Hardware Hackathon: SiliconForge</h3><p>36-hour sprint building real physical prototypes with provided microcontrollers, sensors, and lab equipment.</p></div><a class="btn b-cyan" href="#join">[REGISTER -&gt;]</a></article>
+</div></section>
+
+<section id="team"><div class="wrap">
+  <div class="kick mono">// OPERATIONAL_CREW // 03</div>
+  <h2>Core Team</h2>
+  <p class="sec-p">Undergrad engineers leading lab sessions and club initiatives.</p>
+  <div class="grid4">
+    <article class="card mem"><div class="chipic">U1_CH</div><div class="id">[ID: EXTC_01]</div><h3>[STUDENT NAME 1]</h3><div class="role">Chairperson • TE EXTC</div><div class="sk">[RF &amp; Embedded Systems]</div></article>
+    <article class="card mem"><div class="chipic">U2_VC</div><div class="id">[ID: EXTC_02]</div><h3>[STUDENT NAME 2]</h3><div class="role">Vice Chairperson • TE EXTC</div><div class="sk">[FPGA &amp; Digital Logic]</div></article>
+    <article class="card mem"><div class="chipic">U3_TH</div><div class="id">[ID: EXTC_03]</div><h3>[STUDENT NAME 3]</h3><div class="role">Technical Head • SE EXTC</div><div class="sk">[Firmware &amp; PCB Layout]</div></article>
+    <article class="card mem"><div class="chipic">U4_EV</div><div class="id">[ID: EXTC_04]</div><h3>[STUDENT NAME 4]</h3><div class="role">Events &amp; Logistics • SE EXTC</div><div class="sk">[Hardware Hackathons]</div></article>
+  </div>
+</div></section>
+
+<div class="ctasec" id="join"><div class="wrap">
+  <div class="join">
+    <div><div class="kick mono">[BUS_INTERCONNECT // CALL_TO_ACTION]</div><h2>Build with us.</h2><p>Whether you've never touched a multimeter or already design your own boards, your workbench is waiting at IETE VIT.</p></div>
+    <a class="btn b-solid-yel" href="#join">[JOIN IETE VIT MUMBAI -&gt;]</a>
+  </div>
+</div></div>
+
+<div class="loc"><div class="wrap">
+  <span>REF: IETE-VITM-2025-V2.4</span><span class="sep"></span><span class="w">[Lab 402, EXTC Dept, VIT Mumbai, Wadala]</span>
+  <span class="r">IETE VIT Mumbai Student Forum. Designed for hardware enthusiasts.</span>
+</div></div>
+</main>
+
+<footer><div class="wrap">
+  <div class="fg">
+    <div><div class="fb"><b>IETE-ISF</b><span class="tag">NODE: VIT</span></div><p>The Institution of Electronics and Telecommunication Engineers Students' Forum, Vidyalankar Institute of Technology, Mumbai.</p></div>
+    <div><h4>// NAVIGATION TRACES</h4><ul><li><a href="#about">TP_01 &gt; About Chamber</a></li><li><a href="#events">TP_02 &gt; Telemetry &amp; Events</a></li><li><a href="#team">TP_03 &gt; Council Roster</a></li><li><a href="#join">TP_04 &gt; Recruit Portal</a></li></ul></div>
+    <div><h4>// LAB TERMINAL</h4><p>Dept. of Electronics &amp; Telecommunication Engineering<br>VIT, Wadala (East), Mumbai 400037</p><p class="sig">SIG_FREQ: 2.45 GHz | STAT: <b>ONLINE</b></p></div>
+    <div><h4>// DIGITAL BUSSES</h4><div class="bus"><a href="#">[GitHub]</a><a href="#">[LinkedIn]</a><a href="#">[Discord]</a><a href="#">[Instagram]</a></div></div>
+  </div>
+  <div class="fbot"><span>SILKSCREEN ETCH © 2025 IETE VIT MUMBAI. ALL CIRCUITS RESERVED.</span><span>LAYER: TOP_COPPER &nbsp; SUBSTRATE: FR4</span></div>
+</div></footer>
+</body>
+</html>
